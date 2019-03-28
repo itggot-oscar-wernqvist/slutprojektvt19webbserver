@@ -8,10 +8,10 @@ Ett webforum likt reddit med stöd för bilder. Inloggningssystem. Man ska kunna
 
 ## 2. Vyer (sidor)
 
-### En huvudsida
+### En huvudsida ('/')
     Där man kan sortera och upvotea posts
 
-### En publik profilsida
+### En publik profilsida  ('/')
     Där man kan se någon annans profil och posts
 
 ### En privat profilsida
@@ -31,6 +31,9 @@ Ett webforum likt reddit med stöd för bilder. Inloggningssystem. Man ska kunna
 länk kommer
 
 ## 4. Arkitektur (Beskriv filer och mappar)
+
+Följa MVC
+
 ## 5. (Databas med ER-diagram)
 
-länk kommer
+https://i.imgur.com/VTEJHTf.png
