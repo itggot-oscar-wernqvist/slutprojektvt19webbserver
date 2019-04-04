@@ -8,3 +8,16 @@ article {
 main {
     font-family: sans-serif;
 }
+
+.upvote{
+    position: relative;
+    width: 100px;
+    left: 80%;
+}
+
+.downvote{
+    position: relative;
+    width: 100px;
+    
+    left: 80%;
+}

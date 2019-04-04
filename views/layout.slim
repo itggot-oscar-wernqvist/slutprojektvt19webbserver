@@ -1,7 +1,35 @@
-h1 Nästan Reddit
-- if session[:username] == nil
-p login form
-
-- else 
-
-
+html lang="en"
+    head
+        meta charset="UTF-8"/
+        meta name="viewport" content="width=device-width, initial-scale=1.0"/
+        meta http-equiv="X-UA-Compatible" content="ie=edge"/
+        title Weddit
+        link rel="stylesheet" href="css.css"
+        link rel="stylesheet" href="../css.css"
+        link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/
+    body
+        main
+            header 
+                h1 Nästan Reddit
+                - if session[:username] == nil
+                    div
+                    form method="post" action="/login_attempt"
+                        input type="text" name="username"
+                        input type="password" name="password"
+                        br
+                        input type="submit" value="login"
+                        br
+                    div
+                    form method="post" action="/register_attempt"
+                        input type="text" name="username"
+                        input type="password" name="password"
+                        br
+                        input type="submit" value="register"
+                        br
+                - if session[:username] != nil
+                    p logged in as #{session[:username]}
+                    a href="/create_post" create post 
+                    br
+                    a href="/logout" logout
+                    
+                    ==yield

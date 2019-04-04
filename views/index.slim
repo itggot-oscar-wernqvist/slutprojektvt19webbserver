@@ -1,7 +1,11 @@
 - posts.each do |post|
     article
+        h3 = post["upvote_count"]
         h2 = post["title"]
         p = post["content"]
         br
-        p written #{post["timestamp"]} by 
-        a href="user/#{post["user_id"]}" #{post["username"]}
+        p written #{post["timestamp"]} by <a href="user/#{post["user_id"]}"> #{post["username"]} </a>
+        div class="upvote"
+            a href="/upvote_post/#{post["post_id"]}" upvote
+        div class="downvote"
+            a href="/downvote_post/#{post["post_id"]}" downvote
