@@ -1,5 +1,4 @@
-- posts.each do |post|
-    article
+article
         h3 = post["upvote_count"]
         h2 
             a href="post/#{post["post_id"]}" = post["title"]
@@ -10,3 +9,4 @@
             a href="/upvote_post/#{post["post_id"]}" upvote
         div class="downvote"
             a href="/downvote_post/#{post["post_id"]}" downvote
+/ - comments.each do |comment|

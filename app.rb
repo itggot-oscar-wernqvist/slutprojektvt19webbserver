@@ -26,7 +26,9 @@ post('/login_attempt') do
 end
 
 post('/register_attempt') do
-    register(params["username"], params["password"])
+    if params["password1"] == params["password2"]
+    register(params["username"], params["password1"])
+    end
     redirect('/')
 end
 
@@ -49,19 +51,36 @@ get('/create_post') do
 end
 
 get('/upvote_post/:id') do
-    if prevoius_post_vote(params["id"], session[:user_id]) == false
-        vote_post(params["id"], session[:user_id], 1)
-        redirect('/')
+    vote_value = prevoius_post_vote(params["id"], session[:user_id])
+    if vote_value == 1
+        vote_post(params["id"], session[:user_id], 0, -1)
+    elsif vote_value == -1
+        vote_post(params["id"], session[:user_id], 1, 2)
     else
-        redirect('/')
+        vote_post(params["id"], session[:user_id], 1, 1)
     end
+    redirect('/')
 end
 
 get('/downvote_post/:id') do
-    if prevoius_post_vote(params["id"], session[:user_id]) == false
-        vote_post(params["id"], session[:user_id], -1)
-        redirect('/')
+    vote_value = prevoius_post_vote(params["id"], session[:user_id])
+    if  vote_value == -1
+        vote_post(params["id"], session[:user_id], 0, 1)
+    elsif vote_value == 1
+        vote_post(params["id"], session[:user_id], -1, -2)
     else
+        vote_post(params["id"], session[:user_id], -1, -1)
+    end
+    redirect('/')
+end
+
+get('/post/:id') do
+    post = fetch_1post(params["id"])
+    if post.length == 0
         redirect('/')
     end
+    # comments = fetch_commets(params["id"])
+    slim(:post, locals:{
+        post: post[0]
+    })
 end
