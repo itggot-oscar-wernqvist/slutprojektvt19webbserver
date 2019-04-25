@@ -16,7 +16,21 @@ end
 def fetch_posts()
     db = SQLite3::Database.new("db/reddit.db")
     db.results_as_hash = true
-    result = db.execute("SELECT posts.post_id, posts.title, posts.content, posts.timestamp, posts.user_id, users.username, posts.upvote_count, posts.image_link FROM posts INNER JOIN users ON users.user_id = posts.user_id").reverse
+    result = db.execute("SELECT posts.post_id, posts.title, posts.timestamp, posts.user_id, users.username, posts.upvote_count, posts.image_link FROM posts INNER JOIN users ON users.user_id = posts.user_id").reverse
+    return result
+end
+
+def fetch_1post(id)
+    db = SQLite3::Database.new("db/reddit.db")
+    db.results_as_hash = true
+    result = db.execute("SELECT posts.post_id, posts.title, posts.content, posts.timestamp, posts.user_id, users.username, posts.upvote_count, posts.image_link FROM posts INNER JOIN users ON users.user_id = posts.user_id WHERE posts.post_id = ?", id)
+    return result
+end
+
+def fetch_user_posts(id)
+    db = SQLite3::Database.new("db/reddit.db")
+    db.results_as_hash = true
+    result = db.execute("SELECT posts.post_id, posts.title, posts.content, posts.timestamp, posts.user_id, users.username, posts.upvote_count, posts.image_link FROM posts INNER JOIN users ON users.user_id = posts.user_id WHERE posts.user_id = ?", id)
     return result
 end
 
@@ -53,9 +67,32 @@ def vote_post(post_id, user_id, value, count_change)
     db.execute("UPDATE posts SET upvote_count = ? WHERE post_id = ?", upvote_count + count_change, post_id)
 end
 
-def fetch_1post(id)
+def post_owner(post_id, user_id)
+    db = SQLite3::Database.new("db/reddit.db")
+    if user_id == db.execute("SELECT posts.user_id FROM posts WHERE posts.post_id = ?", post_id)
+        return true
+    end
+    return false
+end
+
+def delete_post(post_id)
+    db = SQLite3::Database.new("db/reddit.db")
+    db.execute("DELETE FROM posts WHERE post_id = ?", post_id)
+end
+
+def comment_post(post_id, user_id, content, username)
+    db = SQLite3::Database.new("db/reddit.db")
+    time = Time.now.asctime
+    db.execute("INSERT INTO comments (post_id, user_id, content, timestamp, upvote_count, username) VALUES (?,?,?,?,?,?)", post_id, user_id, content, time, 0, username)
+end
+
+def delete_comment(comment_id)
+    db = SQLite3::Database.new("db/reddit.db")
+    db.execute("DELETE FROM comments WHERE comment_id = ?", comment_id)
+end
+
+def fetch_comments(post_id) 
     db = SQLite3::Database.new("db/reddit.db")
     db.results_as_hash = true
-    result = db.execute("SELECT posts.post_id, posts.title, posts.content, posts.timestamp, posts.user_id, users.username, posts.upvote_count, posts.image_link FROM posts INNER JOIN users ON users.user_id = posts.user_id WHERE posts.post_id = ?", id)
-    return result
+    result = db.execute("SELECT comments.comment_id, comments.username, comments.user_id, comments.content, comments.timestamp FROM comments WHERE comments.post_id = ?", post_id)
 end

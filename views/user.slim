@@ -1,10 +1,13 @@
+h2 Welcome to the page of #{posts[0]['username']}
+ 
 - posts.each do |post|
     article
-        h4 #{post["upvote_count"]} upvotes
+        h3 = post["upvote_count"]
         h2 
             a href="/post/#{post["post_id"]}" = post["title"]
+        p = post["content"]
         br
-        p written #{post["timestamp"]} by <a href="user/#{post['user_id']}"> #{post["username"]} </a>
+        p written #{post["timestamp"]} by <a href="/user/#{post['user_id']}"> #{post["username"]} </a>
         div class="upvote"
             a href="/upvote_post/#{post["post_id"]}" upvote
         div class="downvote"

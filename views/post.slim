@@ -1,12 +1,26 @@
 article
-        h3 = post["upvote_count"]
+        h4 #{post["upvote_count"]} upvotes
         h2 
-            a href="post/#{post["post_id"]}" = post["title"]
+            a href="/post/#{post["post_id"]}" = post["title"]
         p = post["content"]
         br
-        p written #{post["timestamp"]} by <a href="user/#{post["user_id"]}"> #{post["username"]} </a>
+        p written #{post["timestamp"]} by <a href="/user/#{post['user_id']}"> #{post["username"]} </a>
         div class="upvote"
             a href="/upvote_post/#{post["post_id"]}" upvote
         div class="downvote"
             a href="/downvote_post/#{post["post_id"]}" downvote
-/ - comments.each do |comment|
+form action="/comment_post" method="post"
+        input type="hidden" name="post_id" value="#{post["post_id"]}"
+        input type="text" name="comment" placeholder="comment"
+        input type="submit" value="create"
+        br
+
+- comments.each do |comment|
+    article
+        p = comment["content"]
+        p = comment["timestamp"]
+        a href="/user/#{comment["user_id"]}" = comment["username"]
+        - if session[:logged_in] == true && comment["user_id"] == session[:user_id][0][0]
+            form action="/delete_comment" method="post"
+                input type="hidden" name="comment_id" value="#{comment["comment_id"]}"
+                input type="submit" value="delete"

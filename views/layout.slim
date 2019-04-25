@@ -10,26 +10,27 @@ html lang="en"
     body
         main
             header 
-                h1 Nästan Reddit
+                a href="/"
+                    h1 Nästan Reddit
                 - if session[:username] == nil
                     div
                     form method="post" action="/login_attempt"
-                        input type="text" name="username"
-                        input type="password" name="password"
+                        input type="text" name="username" placeholder="username"
+                        input type="password" name="password" placeholder="password"
                         br
-                        input type="submit" value="login"
+                        input type="submit" value="login" 
                         br
                     div
                     form method="post" action="/register_attempt"
-                        input type="text" name="username"
-                        input type="password" name="password1"
-                        input type="password" name="password2"
+                        input type="text" name="username" placeholder="username"
+                        input type="password" name="password1" placeholder="password"
+                        input type="password" name="password2" placeholder="password"
                         br
                         input type="submit" value="register"
                         br
                 - if session[:username] != nil
                     p logged in as #{session[:username]}
-                    a href="/create_post" create post 
+                    a href="/admin" admin
                     br
                     a href="/logout" logout
                     

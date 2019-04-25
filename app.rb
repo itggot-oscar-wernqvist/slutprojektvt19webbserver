@@ -42,9 +42,12 @@ get('/logout') do
     redirect('/')
 end
 
-get('/create_post') do
+get('/admin') do
     if session[:logged_in] == true
-        slim(:create)
+        posts = fetch_user_posts(session[:user_id])
+        slim(:admin, locals:{
+            posts: posts
+        })
     else
         redirect('/')
     end
@@ -56,10 +59,10 @@ get('/upvote_post/:id') do
         vote_post(params["id"], session[:user_id], 0, -1)
     elsif vote_value == -1
         vote_post(params["id"], session[:user_id], 1, 2)
-    else
+    elsif session[:logged_in] == true
         vote_post(params["id"], session[:user_id], 1, 1)
     end
-    redirect('/')
+    redirect back
 end
 
 get('/downvote_post/:id') do
@@ -68,10 +71,10 @@ get('/downvote_post/:id') do
         vote_post(params["id"], session[:user_id], 0, 1)
     elsif vote_value == 1
         vote_post(params["id"], session[:user_id], -1, -2)
-    else
+    elsif session[:logged_in] == true
         vote_post(params["id"], session[:user_id], -1, -1)
     end
-    redirect('/')
+    redirect back
 end
 
 get('/post/:id') do
@@ -79,8 +82,38 @@ get('/post/:id') do
     if post.length == 0
         redirect('/')
     end
-    # comments = fetch_commets(params["id"])
+    comments = fetch_comments(params["id"])
     slim(:post, locals:{
-        post: post[0]
+        post: post[0],
+        comments: comments
     })
+end
+
+get('/user/:id') do
+    posts = fetch_user_posts(params["id"])
+    if posts.length == 0
+        redirect('/')
+    end
+    slim(:user, locals:{
+        posts: posts
+    })
+end
+
+post('/delete_post') do
+    if post_owner(params["post_id"], session[:user_id]) == true
+        delete_post(params["post_id"])
+    end
+    redirect back
+end
+
+post('/comment_post') do
+    if session[:logged_in] == true
+        comment_post(params["post_id"], session[:user_id], params["comment"], session[:username])
+    end
+    redirect back
+end
+
+post('/delete_comment') do
+    delete_comment(params["comment_id"].to_i)
+    redirect back
 end
