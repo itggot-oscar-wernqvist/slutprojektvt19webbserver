@@ -8,32 +8,41 @@ Ett webforum likt reddit med stöd för bilder. Inloggningssystem. Man ska kunna
 
 ## 2. Vyer (sidor)
 
+### En loginsida
+
 ### En huvudsida ('/')
     Där man kan sortera och upvotea posts
 
-### En publik profilsida  ('/')
+### En publik profilsida  ('/user/:id')
     Där man kan se någon annans profil och posts
 
-### En privat profilsida
-    Där man kan ändra användaruppgifter
-
-### En post-sida
+### En post-sida ('/post/:id')
     Där man kan se posten och kommentarer till denna
-    Man ska kunna upvotea både posten och enskilda kommentarer
+    Man ska kunna upvotea posten
+    Man ska kunna skriva kommentarer och ta bort dem ifall man har skrivit dem
 
-### En create-sida
+### En admin-sida ('/admin')
     Där man kan skriva en post
-
-### En edit och deletefunktion 
+    Man kan ta bort och redigera sina posts
 
 ## 3. Funktionalitet (med sekvensdiagram)
 
-länk kommer
+Upvote-system
+![](https://i.imgur.com/xHF89Rk.png)
+
+Kommentarsfunktion
+
+skriva post- funktion
 
 ## 4. Arkitektur (Beskriv filer och mappar)
 
-Följa MVC
+Följa MVC, 
+en views-mapp med alla slim, en slim per sida + layout
+en controller fil - app.rb
+en db-fil - database.rb
+databasen i db mapp
+
 
 ## 5. (Databas med ER-diagram)
 
-https://i.imgur.com/VTEJHTf.png
+![](https://i.imgur.com/VTEJHTf.png)

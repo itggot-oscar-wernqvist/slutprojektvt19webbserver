@@ -33,7 +33,7 @@ post('/register_attempt') do
 end
 
 post('/post_post') do
-    post_post(params["title"],params["content"])
+    post_post(params["title"],params["content"],params["img"])
     redirect('/')
 end
 
@@ -54,7 +54,7 @@ get('/admin') do
 end
 
 get('/upvote_post/:id') do
-    vote_value = prevoius_post_vote(params["id"], session[:user_id])
+    vote_value = previous_post_vote(params["id"], session[:user_id])
     if vote_value == 1
         vote_post(params["id"], session[:user_id], 0, -1)
     elsif vote_value == -1
@@ -66,7 +66,7 @@ get('/upvote_post/:id') do
 end
 
 get('/downvote_post/:id') do
-    vote_value = prevoius_post_vote(params["id"], session[:user_id])
+    vote_value = previous_post_vote(params["id"], session[:user_id])
     if  vote_value == -1
         vote_post(params["id"], session[:user_id], 0, 1)
     elsif vote_value == 1
@@ -116,4 +116,19 @@ end
 post('/delete_comment') do
     delete_comment(params["comment_id"].to_i)
     redirect back
+end
+
+get('/edit_post/:id') do 
+    if post_owner(params["id"], session[:user_id]) == true
+        result = fetch_1post(params["id"])
+        slim(:edit_post, locals:{
+            post: result[0]} )
+    end
+end
+
+post('/edit_post_attempt') do
+    if post_owner(params["post_id"], session[:user_id]) == true
+        edit_post(params["post_id"], params["title"], params["content"])
+    end
+    redirect('/')
 end

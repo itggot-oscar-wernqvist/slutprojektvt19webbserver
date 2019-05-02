@@ -39,13 +39,13 @@ def register(username,password)
     db.execute("INSERT INTO users (username, password_hash) VALUES (?, ?)", username, BCrypt::Password.create(password))
 end
 
-def post_post(title,content)
+def post_post(title,content,image_link)
     db = SQLite3::Database.new("db/reddit.db")
     time = Time.now.asctime
-    db.execute("INSERT INTO posts (title, content, user_id, timestamp, upvote_count) VALUES (?,?,?,?,?)", title, content, session[:user_id], time, 0)
+    db.execute("INSERT INTO posts (title, content, user_id, timestamp, upvote_count, image_link) VALUES (?,?,?,?,?,?)", title, content, session[:user_id], time, 0, image_link)
 end
 
-def prevoius_post_vote(post_id, user_id)
+def previous_post_vote(post_id, user_id)
     db = SQLite3::Database.new("db/reddit.db")
     db.results_as_hash = true
     result = db.execute("SELECT post_upvotes.post_id, post_upvotes.user_id, post_upvotes.value FROM post_upvotes WHERE post_upvotes.user_id = ? AND post_upvotes.post_id = ?", user_id, post_id) 
@@ -58,7 +58,7 @@ end
 
 def vote_post(post_id, user_id, value, count_change)
     db = SQLite3::Database.new("db/reddit.db")
-    if prevoius_post_vote(post_id, user_id) == false
+    if previous_post_vote(post_id, user_id) == false
         db.execute("INSERT INTO post_upvotes (post_id, user_id, value) VALUES (?,?,?)", post_id, user_id, value)
     else
         db.execute("UPDATE post_upvotes SET value = ? WHERE post_id = ? AND user_id = ?", value, post_id, user_id)
@@ -95,4 +95,10 @@ def fetch_comments(post_id)
     db = SQLite3::Database.new("db/reddit.db")
     db.results_as_hash = true
     result = db.execute("SELECT comments.comment_id, comments.username, comments.user_id, comments.content, comments.timestamp FROM comments WHERE comments.post_id = ?", post_id)
+end
+
+def edit_post(post_id, title, content)
+    db = SQLite3::Database.new("db/reddit.db")
+    time = Time.now.asctime
+    db.execute("UPDATE posts SET title = ?, content = ?, timestamp = ? WHERE post_id = ?", title, content, time, post_id)
 end
