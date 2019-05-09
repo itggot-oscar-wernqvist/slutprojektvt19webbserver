@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  File: README
+  
+    &mdash; Documentation by YARD 0.9.19
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  pathId = "README";
+  relpath = '';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/custom.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: README</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><div id='filecontents'>
+<h1 id="label-slutprojektvt19webbserver">slutprojektvt19webbserver</h1>
+
+<h1 id="label-Projektplan">Projektplan</h1>
+
+<h2 id="label-1.+Projektbeskrivning">1. Projektbeskrivning</h2>
+
+<p>Ett webforum likt reddit med stöd för bilder. Inloggningssystem. Man ska
+kunna göra posts med bilder och sedan kunna kommentera på posts. Det ska
+finnas en huvusida där man ska kunna rösta på posts. Man ska på huvudsidan
+kunna sortera posts efter nyast, mest uppröstat och mest kommenterat.</p>
+
+<h2 id="label-2.+Vyer+-28sidor-29">2. Vyer (sidor)</h2>
+
+<h3 id="label-En+loginsida">En loginsida</h3>
+
+<h3 id="label-En+huvudsida+-28-27-2F-27-29">En huvudsida (&#39;/&#39;)</h3>
+
+<pre class="code ruby"><code class="ruby"><span class='const'>Där</span> <span class='id identifier rubyid_man'>man</span> <span class='id identifier rubyid_kan'>kan</span> <span class='id identifier rubyid_sortera'>sortera</span> <span class='id identifier rubyid_och'>och</span> <span class='id identifier rubyid_upvotea'>upvotea</span> <span class='id identifier rubyid_posts'>posts</span>
+</code></pre>
+
+<h3 id="label-En+publik+profilsida+-28-27-2Fuser-2F-3Aid-27-29">En publik profilsida (&#39;/user/:id&#39;)</h3>
+
+<pre class="code ruby"><code class="ruby"><span class='const'>Där</span> <span class='id identifier rubyid_man'>man</span> <span class='id identifier rubyid_kan'>kan</span> <span class='id identifier rubyid_se'>se</span> <span class='id identifier rubyid_någon'>någon</span> <span class='id identifier rubyid_annans'>annans</span> <span class='id identifier rubyid_profil'>profil</span> <span class='id identifier rubyid_och'>och</span> <span class='id identifier rubyid_posts'>posts</span>
+</code></pre>
+
+<h3 id="label-En+post-sida+-28-27-2Fpost-2F-3Aid-27-29">En post-sida (&#39;/post/:id&#39;)</h3>
+
+<pre class="code ruby"><code class="ruby"><span class='const'>Där</span> <span class='id identifier rubyid_man'>man</span> <span class='id identifier rubyid_kan'>kan</span> <span class='id identifier rubyid_se'>se</span> <span class='id identifier rubyid_posten'>posten</span> <span class='id identifier rubyid_och'>och</span> <span class='id identifier rubyid_kommentarer'>kommentarer</span> <span class='id identifier rubyid_till'>till</span> <span class='id identifier rubyid_denna'>denna</span>
+<span class='const'>Man</span> <span class='id identifier rubyid_ska'>ska</span> <span class='id identifier rubyid_kunna'>kunna</span> <span class='id identifier rubyid_upvotea'>upvotea</span> <span class='id identifier rubyid_posten'>posten</span>
+<span class='const'>Man</span> <span class='id identifier rubyid_ska'>ska</span> <span class='id identifier rubyid_kunna'>kunna</span> <span class='id identifier rubyid_skriva'>skriva</span> <span class='id identifier rubyid_kommentarer'>kommentarer</span> <span class='id identifier rubyid_och'>och</span> <span class='id identifier rubyid_ta'>ta</span> <span class='id identifier rubyid_bort'>bort</span> <span class='id identifier rubyid_dem'>dem</span> <span class='id identifier rubyid_ifall'>ifall</span> <span class='id identifier rubyid_man'>man</span> <span class='id identifier rubyid_har'>har</span> <span class='id identifier rubyid_skrivit'>skrivit</span> <span class='id identifier rubyid_dem'>dem</span>
+</code></pre>
+
+<h3 id="label-En+admin-sida+-28-27-2Fadmin-27-29">En admin-sida (&#39;/admin&#39;)</h3>
+
+<pre class="code ruby"><code class="ruby"><span class='const'>Där</span> <span class='id identifier rubyid_man'>man</span> <span class='id identifier rubyid_kan'>kan</span> <span class='id identifier rubyid_skriva'>skriva</span> <span class='id identifier rubyid_en'>en</span> <span class='id identifier rubyid_post'>post</span>
+<span class='const'>Man</span> <span class='id identifier rubyid_kan'>kan</span> <span class='id identifier rubyid_ta'>ta</span> <span class='id identifier rubyid_bort'>bort</span> <span class='id identifier rubyid_och'>och</span> <span class='id identifier rubyid_redigera'>redigera</span> <span class='id identifier rubyid_sina'>sina</span> <span class='id identifier rubyid_posts'>posts</span>
+</code></pre>
+
+<h2 id="label-3.+Funktionalitet+-28med+sekvensdiagram-29">3. Funktionalitet (med sekvensdiagram)</h2>
+
+<p>Upvote-system <img src="https://i.imgur.com/xHF89Rk.png"></p>
+
+<p>Kommentarsfunktion</p>
+
+<p>skriva post- funktion</p>
+
+<h2 id="label-4.+Arkitektur+-28Beskriv+filer+och+mappar-29">4. Arkitektur (Beskriv filer och mappar)</h2>
+
+<p>Följa MVC. En views-mapp med alla slim, en slim per sida + layout. En
+controller fil - app.rb. En db-fil - database.rb. Databasen i db mapp.</p>
+
+<h2 id="label-5.+-28Databas+med+ER-diagram-29">5. (Databas med ER-diagram)</h2>
+
+<p><img src="https://i.imgur.com/VTEJHTf.png"></p>
+</div></div>
+
+      <div id="footer">
+  Generated on Thu May  9 10:47:48 2019 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.19 (ruby-2.4.2).
+</div>
+
+    </div>
+  </body>
+</html>
