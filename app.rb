@@ -4,6 +4,7 @@ require 'sqlite3'
 require 'bcrypt'
 require_relative('database.rb')
 enable :sessions
+include Model
 
 
 get('/') do
@@ -33,7 +34,7 @@ post('/register_attempt') do
 end
 
 post('/post_post') do
-    post_post(params["title"],params["content"],params["img"])
+    post_post(params["title"],params["content"],params["img"],session[:user_id])
     redirect('/')
 end
 
