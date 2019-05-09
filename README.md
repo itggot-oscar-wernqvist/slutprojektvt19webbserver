@@ -36,11 +36,11 @@ skriva post- funktion
 
 ## 4. Arkitektur (Beskriv filer och mappar)
 
-Följa MVC, 
-en views-mapp med alla slim, en slim per sida + layout
-en controller fil - app.rb
-en db-fil - database.rb
-databasen i db mapp
+Följa MVC.
+En views-mapp med alla slim, en slim per sida + layout. 
+En controller fil - app.rb. 
+En db-fil - database.rb. 
+Databasen i db mapp.
 
 
 ## 5. (Databas med ER-diagram)
