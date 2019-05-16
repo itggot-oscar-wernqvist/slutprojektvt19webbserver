@@ -57,7 +57,8 @@ end
 # @see Model#post_post
 post('/post_post') do
     if params["title"].length > 0 && params["content"].length > 0
-    post_post(params["title"],params["content"],params["img"],session[:user_id])
+        post_post(params["title"],params["content"],params["img"],session[:user_id])
+    end
     redirect('/')
 end
 
