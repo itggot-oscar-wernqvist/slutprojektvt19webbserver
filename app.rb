@@ -42,7 +42,7 @@ end
 #
 # @see Model#register
 post('/register_attempt') do
-    if params["password1"] == params["password2"]
+    if params["password1"] == params["password2"] && params["password1"].length > 0
     register(params["username"], params["password1"])
     end
     redirect('/')
@@ -56,6 +56,7 @@ end
 #
 # @see Model#post_post
 post('/post_post') do
+    if params["title"].length > 0 && params["content"].length > 0
     post_post(params["title"],params["content"],params["img"],session[:user_id])
     redirect('/')
 end
@@ -170,7 +171,7 @@ end
 #
 # @see Model#comment_post
 post('/comment_post') do
-    if session[:logged_in] == true
+    if session[:logged_in] == true && params["comment"].length > 0
         comment_post(params["post_id"], session[:user_id], params["comment"], session[:username])
     end
     redirect back
@@ -209,7 +210,7 @@ end
 # @see Model#post_owner
 # @see Model#edit_post
 post('/edit_post_attempt') do
-    if post_owner(params["post_id"], session[:user_id]) == true
+    if post_owner(params["post_id"], session[:user_id]) == true && params["title"].length > 0 && params["content"].length 
         edit_post(params["post_id"], params["title"], params["content"])
     end
     redirect('/')
